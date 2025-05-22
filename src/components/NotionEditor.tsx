@@ -123,6 +123,9 @@ const NotionEditor: React.FC<NotionEditorProps> = ({ pageId }) => {
     );
   }
 
+  // Check if title is empty to show placeholder effect
+  const titleIsEmpty = !title.trim();
+
   return (
     <div className="notion-editor">
       {/* Page header with title */}
@@ -132,8 +135,8 @@ const NotionEditor: React.FC<NotionEditorProps> = ({ pageId }) => {
           contentEditable
           onInput={handleTitleInput}
           onKeyDown={handleKeyDown}
-          className="text-3xl font-bold mb-2 outline-none pb-1 notion-block-hover"
-          placeholder="Untitled"
+          className={`text-3xl font-bold mb-2 outline-none pb-1 notion-block-hover ${titleIsEmpty ? 'before:content-[attr(data-placeholder)] before:text-gray-400 before:pointer-events-none' : ''}`}
+          data-placeholder="Untitled"
           suppressContentEditableWarning={true}
         >
           {title}
